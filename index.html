@@ -8,6 +8,16 @@
 </head>
 <body>
 
+    <!-- Botón Dark Mode -->
+    <button class="theme-toggle" id="themeToggle" title="Cambiar a tema oscuro">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <!-- Botón Scroll to Top -->
+    <button class="scroll-to-top" id="scrollToTop" title="Volver al inicio">
+        <span>↑</span>
+    </button>
+
     <header class="main-header">
         <h1>PORTAFOLIO ACADÉMICO</h1>
         <h2>Desarrollo Lógico y Algoritmo - UTP</h2>
@@ -15,11 +25,26 @@
 
     <div class="container">
 
+        <!-- INDICADOR DE PROGRESO -->
+        <section class="progress-section">
+            <div class="progress-header">
+                <h3>Progreso del Portafolio</h3>
+                <span class="progress-percentage" id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-stats">
+                <span class="stat"><strong id="completedCount">0</strong> Completadas</span>
+                <span class="stat"><strong id="totalCount">8</strong> Total</span>
+            </div>
+        </section>
+
         <section class="info-grid">
             <div class="info-card course-info">
                 <h3>Información del Curso</h3>
                 <p><strong>Universidad:</strong> Tecnológica de Panamá</p>
-                <p><strong>Facultad:</strong> Sistemas Computacionales</p>
+                <p><strong>Facultad:</strong> Estudios Generales</p>
                 <p><strong>Profesor:</strong> Napoleón Ibarra</p>
             </div>
 
@@ -58,150 +83,368 @@
 
         <section class="section-box development-box">
             <h2>I Parte. Desarrollo (Valor 80 Puntos)</h2>
-            <p class="instruction">A continuación, se presentan las asignaciones realizadas durante el curso. Para acceder a la documentación completa (PDF), haga clic en el título de la asignación.</p>
+            <p class="instruction">A continuación, se presentan las asignaciones realizadas, **ordenadas por su fecha de entrega**.</p>
 
-            <article class="assignment-card">
-                <header>
-                    <h3><a href="PARCIAL 1 RICK JIMENEZ.pdf" target="_blank">1. Parcial 1 Rick Jimenez</a></h3>
-                    <span class="tag partial-tag">Parcial</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Problema:** Solución que lee la hora en notación de 24 horas y que imprime en notación de 12 horas, determinando la hora más baja y la más alta de tres valores ingresados.</p>
-                    <h4>Análisis Lógico (Diagrama de Flujo / Pseudocódigo)</h4>
-                    <pre class="code-block">// Se incluye el pseudocódigo para la conversión y la lógica condicional
-// para determinar la hora más baja y la más alta.</pre>
-                    <h4>Código Fuente C</h4>
-                    <pre class="code-block">#include &lt;stdio.h&gt;
-
-int main() {
-    // ... Código completo de la solución del Parcial 1 ...
-    printf("Salario Bruto: ... Balboas\n");
-    printf("Salario Neto: ... Balboas\n");
-    return 0;
-}</pre>
+            <!-- BÚSQUEDA Y ORDENAMIENTO -->
+            <div class="search-sort-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar asignaciones..." />
                 </div>
-            </article>
+                <div class="sort-box">
+                    <label for="sortSelect">Ordenar por:</label>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="default">Defecto</option>
+                        <option value="name">Nombre (A-Z)</option>
+                        <option value="date">Fecha (Más Reciente)</option>
+                        <option value="type">Tipo</option>
+                    </select>
+                </div>
+            </div>
 
-            <article class="assignment-card">
-                <header>
-                    <h3><a href="Laboratorio Práctico 1 Isaac y Rick.pdf" target="_blank">2. Laboratorio Práctico 1 Isaac y Rick</a></h3>
-                    <span class="tag lab-tag">Laboratorio</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Problema:** Varios ejercicios incluyendo la impresión de un mensaje y el cálculo de ventas para un informe de tres productos (cola, naranja, limón).</p>
-                    <h4>Análisis Lógico (Diagrama de Flujo / Pseudocódigo)</h4>
-                    <pre class="code-block">Inicio
+            <nav class="filter-nav">
+                <button class="filter-btn active" data-filter="all">
+                    Todas <span class="filter-count" data-count="8">(8)</span>
+                </button>
+                <button class="filter-btn" data-filter="partial-tag">
+                    Parciales <span class="filter-count" data-count="2">(2)</span>
+                </button>
+                <button class="filter-btn" data-filter="lab-tag">
+                    Laboratorios <span class="filter-count" data-count="2">(2)</span>
+                </button>
+                <button class="filter-btn" data-filter="exercise-tag">
+                    Ejercicios <span class="filter-count" data-count="2">(2)</span>
+                </button>
+                <button class="filter-btn" data-filter="research-tag">
+                    Investigaciones <span class="filter-count" data-count="2">(2)</span>
+                </button>
+            </nav>
+
+            <div class="assignments-container" id="assignmentsContainer">
+                <article class="assignment-card research-tag" data-name="Tarea Investigacion D.Logico" data-date="2025" data-type="research">
+                    <header>
+                        <h3><a href="Tarea investigacion D.Logico.pdf" target="_blank">1. Tarea Investigacion D.Logico</a></h3>
+                        <span class="tag research-tag">Investigación</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 2025</p>
+                        <p class="description">**Contenido Principal:** Análisis del Proceso de Programación, comparando los Pilares de la Programación (Algoritmo, Prueba de Escritorio, Codificación, Compilación) y el nivel de abstracción en cada fase.</p>
+                    </div>
+                </article>
+
+                <article class="assignment-card research-tag" data-name="Investigación 2 Logica" data-date="2025" data-type="research">
+                    <header>
+                        <h3><a href="Investigación 2 Logica.pdf" target="_blank">2. Investigación 2 Logica</a></h3>
+                        <span class="tag research-tag">Investigación</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 2025</p>
+                        <p class="description">**Contenido Principal:** Análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) contrastando el lenguaje **Python** con el lenguaje **C** para el desarrollo lógico y algorítmico.</p>
+                    </div>
+                </article>
+                
+                <article class="assignment-card lab-tag" data-name="Laboratorio Práctico 1 Isaac y Rick" data-date="2025" data-type="lab">
+                    <header>
+                        <h3><a href="Laboratorio Práctico 1 Isaac y Rick.pdf" target="_blank">3. Laboratorio Práctico 1 Isaac y Rick</a></h3>
+                        <span class="tag lab-tag">Laboratorio</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 2025</p>
+                        <p class="description">**Problema:** Varios ejercicios incluyendo la impresión de un mensaje y el cálculo de ventas para un informe de tres productos (cola, naranja, limón).</p>
+                        <h4>Análisis Lógico (Diagrama de Flujo / Pseudocódigo)</h4>
+                        <pre class="code-block">Inicio
     Leer cantidad_cola, precio_cola
     ...
     total_general = total_cola + total_naranja + total_limon
-    Imprimir informe de ventas
 Fin</pre>
-                    <h4>Código Fuente C</h4>
-                    <pre class="code-block">#include &lt;stdio.h&gt;
+                        <h4>Código Fuente C</h4>
+                        <pre class="code-block">#include &lt;stdio.h&gt;
 
 int main() {
-    float cantidad_cola, precio_cola;
     // ... Código completo para la lectura de datos y cálculo de ventas ...
     return 0;
 }</pre>
-                </div>
-            </article>
+                    </div>
+                </article>
 
-            <article class="assignment-card">
-                <header>
-                    <h3><a href="Ejercicio Practico 1 Isaac Rick.pdf" target="_blank">3. Ejercicio Práctico 1 Isaac Rick</a></h3>
-                    <span class="tag exercise-tag">Ejercicio Práctico</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Problema:** Calcular consumo de combustible (litros y dólar por 100km) y velocidad media, además de evaluar una nota final para determinar si el estudiante aprueba o no el curso.</p>
-                    <h4>Análisis Lógico y Solución</h4>
-                    <pre class="code-block">// Lógica para cálculo de kilometraje, combustible y la estructura
+                <article class="assignment-card exercise-tag" data-name="Ejercicio Practico 1 Isaac Rick" data-date="2025" data-type="exercise">
+                    <header>
+                        <h3><a href="Ejercicio Practico 1 Isaac Rick.pdf" target="_blank">4. Ejercicio Práctico 1 Isaac Rick</a></h3>
+                        <span class="tag exercise-tag">Ejercicio Práctico</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 2025</p>
+                        <p class="description">**Problema:** Calcular consumo de combustible y velocidad media, además de evaluar una nota final para determinar si el estudiante aprueba o no el curso.</p>
+                        <h4>Análisis Lógico y Solución</h4>
+                        <pre class="code-block">// Lógica para cálculo de kilometraje, combustible y la estructura
 // condicional (SI... ENTONCES) para la evaluación de la nota final >= 71.</pre>
-                    <h4>Código Fuente C</h4>
-                    <pre class="code-block">#include &lt;stdio.h&gt;
+                        <h4>Código Fuente C</h4>
+                        <pre class="code-block">#include &lt;stdio.h&gt;
 
 int main() {
     // ... Código para solicitar datos de viaje y notas ...
-    // ... Cálculo de nota_final y condicional de aprobación ...
     return 0;
 }</pre>
-                </div>
-            </article>
-
-            <article class="assignment-card research-card">
-                <header>
-                    <h3><a href="Tarea investigacion D.Logico.pdf" target="_blank">4. Tarea Investigacion D.Logico</a></h3>
-                    <span class="tag research-tag">Investigación</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Contenido Principal:** Análisis del Proceso de Programación, comparando los Pilares de la Programación (Algoritmo, Prueba de Escritorio, Codificación, Compilación) y el nivel de abstracción en cada fase.</p>
-                </div>
-            </article>
-
-            <article class="assignment-card research-card">
-                <header>
-                    <h3><a href="Investigación 2 Logica.pdf" target="_blank">5. Investigación 2 Logica</a></h3>
-                    <span class="tag research-tag">Investigación</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Contenido Principal:** Análisis FODA (Fortalezas, Oportunidades, Debilidades, Amenazas) contrastando el lenguaje **Python** con el lenguaje **C** para el desarrollo lógico y algorítmico.</p>
-                </div>
-            </article>
-
-            <article class="assignment-card">
-                <header>
-                    <h3><a href="Ejercicio Práctico2 Isaac y Rick.pdf" target="_blank">6. Ejercicio Práctico 2 Isaac y Rick</a></h3>
-                    <span class="tag exercise-tag">Ejercicio Práctico</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Problema:** Implementación de un sistema de ventas en una interfaz gráfica (GUI) utilizando Python (Tkinter), con un enfoque en la correcta distribución de datos y cálculo de totales.</p>
-                    <h4>Descripción del Desarrollo</h4>
-                    <pre class="code-block"># Uso de Tkinter para la interfaz y lógica para manejar los eventos
+                    </div>
+                </article>
+                
+                <article class="assignment-card exercise-tag" data-name="Ejercicio Práctico2 Isaac y Rick" data-date="14/10/2025" data-type="exercise">
+                    <header>
+                        <h3><a href="Ejercicio Práctico2 Isaac y Rick.pdf" target="_blank">5. Ejercicio Práctico 2 Isaac y Rick</a></h3>
+                        <span class="tag exercise-tag">Ejercicio Práctico</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 14/10/2025</p>
+                        <p class="description">**Problema:** Implementación de un sistema de ventas en una interfaz gráfica (GUI) utilizando Python (Tkinter), con un enfoque en la correcta distribución de datos y cálculo de totales.</p>
+                        <h4>Descripción del Desarrollo</h4>
+                        <pre class="code-block"># Uso de Tkinter para la interfaz y lógica para manejar los eventos
 # de ingreso y cálculo de precios/totales.</pre>
-                </div>
-            </article>
+                    </div>
+                </article>
 
-            <article class="assignment-card">
-                <header>
-                    <h3><a href="Taller Práctico Isaac y Rick.pdf" target="_blank">7. Taller Práctico Isaac y Rick</a></h3>
-                    <span class="tag lab-tag">Taller Práctico</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Problema:** Investigación y desarrollo de procedimientos de búsqueda y ordenamiento (Búsqueda secuencial, Push Down) y conceptos de Bases de Datos MySQL, incluyendo la implementación de un sistema de alquiler básico.</p>
-                    <h4>Desarrollo Lógico y SQL</h4>
-                    <pre class="code-block">// Lógica para búsquedas en arreglos y comandos SQL (INSERT, UPDATE, DELETE)
+                <article class="assignment-card lab-tag" data-name="Taller Práctico Isaac y Rick" data-date="28/10/2025" data-type="lab">
+                    <header>
+                        <h3><a href="Taller Práctico Isaac y Rick.pdf" target="_blank">6. Taller Práctico Isaac y Rick</a></h3>
+                        <span class="tag lab-tag">Taller Práctico</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 28/10/2025</p>
+                        <p class="description">**Problema:** Investigación y desarrollo de procedimientos de búsqueda y ordenamiento y conceptos de Bases de Datos MySQL, incluyendo la implementación de un sistema de alquiler básico.</p>
+                        <h4>Desarrollo Lógico y SQL</h4>
+                        <pre class="code-block">// Lógica para búsquedas en arreglos y comandos SQL (INSERT, UPDATE, DELETE)
 // para el control de inventario y alquiler de equipos.</pre>
-                </div>
-            </article>
+                    </div>
+                </article>
+                
+                <article class="assignment-card partial-tag" data-name="Parcial 1 Rick Jimenez" data-date="2025" data-type="partial">
+                    <header>
+                        <h3><a href="PARCIAL 1 RICK JIMENEZ.pdf" target="_blank">7. Parcial 1 Rick Jimenez</a></h3>
+                        <span class="tag partial-tag">Parcial</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 2025</p>
+                        <p class="description">**Problema:** Solución que lee la hora en notación de 24 horas y que imprime en notación de 12 horas, determinando la hora más baja y la más alta de tres valores ingresados.</p>
+                        <h4>Análisis Lógico (Diagrama de Flujo / Pseudocódigo)</h4>
+                        <pre class="code-block">// Lógica condicional para determinar la hora más baja y la más alta.</pre>
+                        <h4>Código Fuente C</h4>
+                        <pre class="code-block">#include &lt;stdio.h&gt;
 
-            <article class="assignment-card">
-                <header>
-                    <h3><a href="Examen Parcial 2.pdf" target="_blank">8. Examen Parcial 2</a></h3>
-                    <span class="tag partial-tag">Parcial</span>
-                </header>
-                <div class="content">
-                    <p class="description">**Caso de Estudio CHINOS CAFE:** Implementación de un Sistema de Información (PYTHON + MySQL) en un entorno de Máquina Virtual para gestionar datos, incluyendo replicación de base de datos (Master-Slave), lógica de negocio transaccional y seguridad.</p>
-                    <h4>Implementación y Lógica</h4>
-                    <pre class="code-block">// Lógica de negocio en Python para garantizar la Transacción Atómica (ACID) 
-// en el manejo de ventas y stock del Sistema POS.
+int main() {
+    // ... Código completo de la solución del Parcial 1 ...
+    return 0;
+}</pre>
+                    </div>
+                </article>
 
+                <article class="assignment-card partial-tag" data-name="Examen Parcial 2" data-date="18/11/2025" data-type="partial">
+                    <header>
+                        <h3><a href="Examen Parcial 2.pdf" target="_blank">8. Examen Parcial 2</a></h3>
+                        <span class="tag partial-tag">Parcial</span>
+                    </header>
+                    <div class="content">
+                         <p class="delivery-date">**Fecha de Entrega:** 18/11/2025</p>
+                        <p class="description">**Caso de Estudio CHINOS CAFE:** Implementación de un Sistema de Información (PYTHON + MySQL) en un entorno de Máquina Virtual, incluyendo replicación, lógica de negocio transaccional y seguridad.</p>
+                        <h4>Implementación y Lógica</h4>
+                        <pre class="code-block">// Lógica de negocio en Python para garantizar la Transacción Atómica (ACID). 
 // Configuración de la réplica de la base de datos MySQL (Master-Slave).
-// Instalación y configuración de UFW y Fail2ban para la protección activa 
-// del Servidor Web Apache contra ataques de fuerza bruta y DDoS.</pre>
-                    <h4>Documentación Completa</h4>
-                    <p class="instruction">Haz clic en el título de la asignación para ver la documentación completa, diagramas de flujo y factura técnica.</p>
-                </div>
-            </article>
+// Instalación y configuración de UFW y Fail2ban.</pre>
+                        <h4>Documentación Completa</h4>
+                        <p class="instruction">Haz clic en el título de la asignación para ver la documentación completa, diagramas de flujo y factura técnica.</p>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- MENSAJE DE NO RESULTADOS -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <p>😔 No se encontraron asignaciones que coincidan con tu búsqueda.</p>
+            </div>
 
         </section>
 
     </div>
 
     <footer class="main-footer">
-        <p>Portafolio desarrollado con HTML/CSS. | Universidad Tecnológica de Panamá</p>
+        <p>Portafolio desarrollado con HTML/CSS/JavaScript. | Universidad Tecnológica de Panamá</p>
         <p>Enlace de ejemplo: <a href="https://geraldogonzalez.github.io/portafolio/portafolio-es/index.html#proyectos" target="_blank">Enlace UTP</a></p>
         <p>**¡Buena Suerte!**</p>
     </footer>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+<script>
+    // ===================================
+    // GESTIÓN DE TEMAS (DARK MODE)
+    // ===================================
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    
+    // Cargar tema guardado
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon();
+    
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon();
+        showToast(`Modo ${newTheme === 'dark' ? 'Oscuro' : 'Claro'} activado`);
+    });
+    
+    function updateThemeIcon() {
+        const theme = htmlElement.getAttribute('data-theme');
+        themeToggle.innerHTML = theme === 'dark' ? '<span class="theme-icon">☀️</span>' : '<span class="theme-icon">🌙</span>';
+    }
+
+    // ===================================
+    // BOTÓN SCROLL TO TOP
+    // ===================================
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+    
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===================================
+    // TOAST NOTIFICATIONS
+    // ===================================
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // ===================================
+    // BÚSQUEDA Y ORDENAMIENTO
+    // ===================================
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const assignmentsContainer = document.getElementById('assignmentsContainer');
+    const assignments = document.querySelectorAll('.assignment-card');
+    const noResults = document.getElementById('noResults');
+
+    function filterAndSort() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const sortValue = sortSelect.value;
+        let visibleCards = [];
+
+        // Filtrar por búsqueda
+        assignments.forEach(card => {
+            const name = card.getAttribute('data-name').toLowerCase();
+            const description = card.querySelector('.description').textContent.toLowerCase();
+            
+            if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                card.style.display = 'block';
+                visibleCards.push(card);
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Ordenar
+        if (sortValue !== 'default') {
+            visibleCards.sort((a, b) => {
+                if (sortValue === 'name') {
+                    return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+                } else if (sortValue === 'date') {
+                    return b.getAttribute('data-date').localeCompare(a.getAttribute('data-date'));
+                } else if (sortValue === 'type') {
+                    return a.getAttribute('data-type').localeCompare(b.getAttribute('data-type'));
+                }
+            });
+        }
+
+        // Reorganizar DOM
+        visibleCards.forEach(card => {
+            assignmentsContainer.appendChild(card);
+        });
+
+        // Mostrar/ocultar mensaje de no resultados
+        noResults.style.display = visibleCards.length === 0 ? 'block' : 'none';
+
+        // Animar
+        visibleCards.forEach((card, index) => {
+            card.style.animation = `fadeInUp 0.4s ease-out ${index * 0.1}s both`;
+        });
+    }
+
+    searchInput.addEventListener('input', filterAndSort);
+    sortSelect.addEventListener('change', filterAndSort);
+
+    // ===================================
+    // LÓGICA DE FILTRADO
+    // ===================================
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            const filterValue = button.getAttribute('data-filter');
+            let visibleCount = 0;
+
+            assignments.forEach(card => {
+                const isVisible = filterValue === 'all' || card.classList.contains(filterValue);
+                
+                if (isVisible) {
+                    card.classList.remove('filtered');
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.classList.add('filtered');
+                    card.style.display = 'none';
+                }
+            });
+
+            // Animar
+            setTimeout(() => {
+                assignments.forEach(card => {
+                    if (!card.classList.contains('filtered')) {
+                        card.style.opacity = 1;
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }, 10);
+
+            // Resetear búsqueda
+            searchInput.value = '';
+            sortSelect.value = 'default';
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+    });
+
+    // ===================================
+    // INDICADOR DE PROGRESO
+    // ===================================
+    function updateProgress() {
+        const total = assignments.length;
+        const completed = total; // Todas están completadas (ajusta si es necesario)
+        const percentage = Math.round((completed / total) * 100);
+        
+        document.getElementById('progressPercentage').textContent = percentage + '%';
+        document.getElementById('progressFill').style.width = percentage + '%';
+        document.getElementById('completedCount').textContent = completed;
+    }
+
+    updateProgress();
+
+    // Ejecutar filtro 'all' al cargar
+    document.querySelector('.filter-btn[data-filter="all"]').click();
+</script>
 </body>
 </html>
