@@ -1,116 +1,194 @@
-/* FUENTES Y COLORES GLOBALES */
+/* PALETA DE COLORES Y FUENTES */
 :root {
-    --color-utp-azul: #007bff;
-    --color-utp-gris: #f8f9fa;
-    --color-texto-principal: #333;
-    --color-fondo-claro: #ffffff;
+    --color-utp-azul: #004d99; /* Azul más oscuro y profesional */
+    --color-utp-azul-claro: #007bff;
+    --color-fondo-principal: #f4f6f9;
+    --color-tarjeta-fondo: #ffffff;
     --color-sombra: rgba(0, 0, 0, 0.1);
+    --color-texto-principal: #333;
+    --color-borde: #dee2e6;
 }
 
+/* GENERAL */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--color-utp-gris);
+    background-color: var(--color-fondo-principal);
     color: var(--color-texto-principal);
 }
 
-/* CONTENEDOR PRINCIPAL */
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 30px auto;
-    padding: 20px;
-    background-color: var(--color-fondo-claro);
-    box-shadow: 0 4px 12px var(--color-sombra);
-    border-radius: 8px;
+    padding: 0 20px;
 }
 
-/* ENCABEZADOS Y METADATOS */
-header {
+/* CABECERA */
+.main-header {
     background-color: var(--color-utp-azul);
     color: #ffffff;
-    padding: 30px 20px;
-    border-radius: 8px 8px 0 0;
+    padding: 40px 0;
     text-align: center;
-    margin-bottom: 20px;
+    box-shadow: 0 4px 10px var(--color-sombra);
 }
 
-header h1 {
+.main-header h1 {
     margin: 0;
-    font-size: 2.2em;
-    border-bottom: 2px solid #ffffff;
-    padding-bottom: 10px;
-    display: inline-block;
+    font-size: 2.8em;
+    font-weight: 700;
 }
 
-header h2 {
-    font-weight: 300;
+.main-header h2 {
+    margin: 5px 0 0;
     font-size: 1.2em;
-    margin-top: 5px;
+    font-weight: 300;
+    opacity: 0.9;
 }
 
-.metadata-section {
-    background-color: #e9ecef;
-    padding: 15px;
-    border-radius: 4px;
-    margin-bottom: 25px;
-    border-left: 5px solid var(--color-utp-azul);
+/* SECCIÓN DE INFORMACIÓN Y TARJETAS */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-.metadata-section p {
+.info-card {
+    background-color: var(--color-tarjeta-fondo);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--color-sombra);
+    border-top: 5px solid var(--color-utp-azul-claro);
+}
+
+.info-card h3 {
+    margin-top: 0;
+    color: var(--color-utp-azul-claro);
+    border-bottom: 1px solid var(--color-borde);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.info-card p {
     margin: 5px 0;
     font-size: 0.95em;
 }
 
-/* TABLA DE CRITERIOS DE EVALUACIÓN */
+/* SECCIÓN GENERAL */
+.section-box {
+    background-color: var(--color-tarjeta-fondo);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--color-sombra);
+    margin-bottom: 30px;
+}
+
+.section-box h2 {
+    color: var(--color-utp-azul);
+    border-bottom: 3px solid var(--color-utp-azul);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.instruction {
+    font-style: italic;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+/* TABLA DE EVALUACIÓN */
 .evaluation-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
-    box-shadow: 0 2px 5px var(--color-sombra);
+    font-size: 0.95em;
 }
 
 .evaluation-table th, .evaluation-table td {
     padding: 12px;
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--color-borde);
     text-align: left;
 }
 
 .evaluation-table th {
-    background-color: #0056b3;
+    background-color: var(--color-utp-azul-claro);
     color: white;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .evaluation-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: var(--color-fondo-principal);
 }
 
-/* SECCIONES DE ASIGNACIONES (PARTE I. Desarrollo) */
-.assignment-section {
-    margin-top: 30px;
-    padding: 20px;
+/* ASIGNACIONES (PARTE I) */
+.assignment-card {
     border: 1px solid #ced4da;
     border-radius: 6px;
-    background-color: #ffffff;
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
 }
 
-.assignment-section h3 {
+.assignment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--color-sombra);
+}
+
+.assignment-card header {
+    background-color: #e9ecef;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.assignment-card h3 {
     color: var(--color-utp-azul);
-    border-bottom: 2px solid var(--color-utp-azul);
-    padding-bottom: 5px;
-    margin-top: 0;
-    font-size: 1.5em;
+    margin: 0;
+    font-size: 1.4em;
 }
 
-.assignment-section strong {
-    font-weight: bold;
+.tag {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.85em;
+    color: white;
+}
+
+.tag.partial-tag { background-color: #dc3545; } /* Rojo */
+.tag.lab-tag { background-color: #ffc107; color: #333; } /* Amarillo */
+.tag.exercise-tag { background-color: #28a745; } /* Verde */
+.tag.research-tag { background-color: #17a2b8; } /* Turquesa */
+.tag.pending-tag { background-color: #6c757d; } /* Gris */
+
+.assignment-card .content {
+    padding: 20px;
+}
+
+.content .description {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    border-left: 3px solid #007bff;
+    padding-left: 10px;
+}
+
+.content h4 {
     color: #000;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
-.assignment-section pre {
-    background-color: #272822; /* Fondo oscuro para el código */
+.code-block {
+    background-color: #272822; /* Fondo oscuro de terminal */
     color: #f8f8f2;
     padding: 15px;
     border-radius: 4px;
@@ -120,11 +198,17 @@ header h2 {
     margin-top: 10px;
 }
 
-/* Pie de Página */
-footer {
+/* PIE DE PÁGINA */
+.main-footer {
     text-align: center;
     padding: 20px;
     margin-top: 40px;
     color: #6c757d;
     font-size: 0.85em;
+    border-top: 1px solid var(--color-borde);
+}
+
+.main-footer a {
+    color: var(--color-utp-azul-claro);
+    text-decoration: none;
 }
