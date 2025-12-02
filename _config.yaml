@@ -1,0 +1,5 @@
+# GitHub Pages configuration
+markdown: kramdown
+theme: null
+exclude: []
+include: [".nojekyll"]

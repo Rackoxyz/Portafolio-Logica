@@ -1,0 +1,12 @@
+# Operating System
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# No ignorar archivos PDF
+!*.pdf
